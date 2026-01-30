@@ -483,6 +483,24 @@ public class TileEnergyStorageCore extends TileObjectSync {
         return (int) energyExtracted;
     }
 
+    public long receiveEnergy(long maxReceive, boolean simulate) {
+        long energyReceived = Math.min(capacity - energy, maxReceive);
+
+        if (!simulate) {
+            energy += energyReceived;
+        }
+        return energyReceived;
+    }
+
+    public long extractEnergy(long maxExtract, boolean simulate) {
+        long energyExtracted = Math.min(energy, maxExtract);
+
+        if (!simulate) {
+            energy -= energyExtracted;
+        }
+        return energyExtracted;
+    }
+
     public long getEnergyStored() {
         return energy;
     }
